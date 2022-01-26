@@ -1,33 +1,19 @@
-module.exports = function check(str, config) {
-  let count = 0;
-  let c = 0
-  for (let i = 0; i < config.length; i++) {
 
+module.exports = function check(str, bracketsConfig) {
 
-    for (let j = 0; j < config[i].length; j++) {
-
-
-
-      str.split('').forEach(el => {
-        if (el === config[i][0]) {
-          count++
-
-        } else if (el === config[i][1]) {
-          count--
-          c = count
-        }
-      })
-
-
-    }
-
+  let strArr = str.split('');
+  for (let i = 0; i < strArr.length; i++) {
+    bracketsConfig.forEach((el) => {
+      if (strArr[i] === el[0] && strArr[i + 1] === el[1]) {
+        strArr.splice(i, 2);
+        i = -1;
+      }
+    })
   }
-  if (c !== 0) {
-    return false
-  } else {
-    return true
-  }
+
+  return strArr.length === 0
 
 }
+
 
 
